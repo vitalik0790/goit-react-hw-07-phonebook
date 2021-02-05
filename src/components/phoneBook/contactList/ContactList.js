@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import contactsActions from '../../../redux/contacts/contactsActions'
+// import contactsActions from '../../../redux/contacts/contactsActions';
+import contactsOperations from '../../../redux/contacts/contactsOperations'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
@@ -40,7 +41,6 @@ ContactList.propTypes = {
         PropTypes.shape({
             name: PropTypes.string,
             number: PropTypes.string,
-            id: PropTypes.string,
         }),
     ),
     deleteContact: PropTypes.func,
@@ -63,7 +63,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteContact: (id) => {
-            dispatch(contactsActions.deleteContact(id));
+            dispatch(contactsOperations.removeContact(id));
         },
 
         // getFiltredContacts: ({ contacts, filter }) => {

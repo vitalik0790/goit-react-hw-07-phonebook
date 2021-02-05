@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import contactsActions from "../../../redux/contacts/contactsActions";
+import contactsOperations from "../../../redux/contacts/contactsOperations";
 import Notification from '../notification/Notification';
 import Empty from '../empty/Empty';
 import { CSSTransition } from "react-transition-group";
@@ -15,21 +16,21 @@ class ContactForm extends Component {
         showEmpty: false,
     }
 
-    componentDidMount() {
-        const contacts = localStorage.getItem("contacts");
+    // componentDidMount() {
+    //     const contacts = localStorage.getItem("contacts");
 
-        if (contacts) {
-            this.props.addToLocalStorage(JSON.parse(contacts));
-        }
-    }
+    //     if (contacts) {
+    //         this.props.addToLocalStorage(JSON.parse(contacts));
+    //     }
+    // }
 
-    componentDidUpdate(prevProps) {
-        const { contacts } = this.props;
+    // componentDidUpdate(prevProps) {
+    //     const { contacts } = this.props;
 
-        if (prevProps.contacts !== contacts) {
-            localStorage.setItem("contacts", JSON.stringify(contacts));
-        }
-    }
+    //     if (prevProps.contacts !== contacts) {
+    //         localStorage.setItem("contacts", JSON.stringify(contacts));
+    //     }
+    // }
 
     handleChange = (e) => {
         const name = e.target.name;
@@ -87,8 +88,8 @@ class ContactForm extends Component {
 }
 
 const mapDispatchToProps = {
-    addContact: contactsActions.addContact,
-    addToLocalStorage: contactsActions.addToLocalStorage,
+    addContact: contactsOperations.addContact,
+    // addToLocalStorage: contactsActions.addToLocalStorage,
 }
 
 const mapStateToProps = (state) => {

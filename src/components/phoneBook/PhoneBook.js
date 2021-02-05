@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import ContactForm from './contactForm/ContactForm'
 import ContactList from './contactList/ContactList';
+import contactsOperations from '../../redux/contacts/contactsOperations'
 import ContactFilter from './contactFilter/ContactFilter';
 import { CSSTransition } from "react-transition-group";
 import s from './PhoneBook.module.css';
@@ -10,6 +11,11 @@ import s from './PhoneBook.module.css';
 
 
 class PhoneBook extends Component {
+
+    componentDidMount() {
+        this.props.onFetchContacts();
+    }
+
 
     render() {
         return (
@@ -24,10 +30,10 @@ class PhoneBook extends Component {
                 </CSSTransition>
 
                 <ContactForm />
-
-                {this.props.contacts.length > 1 &&
+                <ContactFilter />
+                {/* {this.props.contacts.length > 1 &&
                     <ContactFilter />
-                }
+                } */}
                 <ContactList />
             </div >
         );
@@ -40,4 +46,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(PhoneBook);
+const mapDispatchToProps = {
+    onFetchContacts: contactsOperations.fetchContacts,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);
