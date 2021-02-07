@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import contactsActions from '../../../redux/contacts/contactsActions'
+import contactsSelectors from '../../../redux/contacts/contactsSelectors';
 import PropTypes from 'prop-types';
 import s from './ContactFilter.module.css';
 
@@ -10,7 +11,7 @@ const ContactFilter = ({ value, onHandleFilter }) => {
         <div>
             <h3>Find contacts by name</h3>
             <input className={s.input}
-                type="text"
+                type="search"
                 value={value}
                 onChange={(e) => onHandleFilter(e.target.value)}
             />
@@ -24,7 +25,7 @@ ContactFilter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    value: state.contacts.filter,
+    value: contactsSelectors.getFilterValue(state),
 })
 
 const mapDispatchToProps = {

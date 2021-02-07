@@ -4,6 +4,7 @@ import ContactForm from './contactForm/ContactForm'
 import ContactList from './contactList/ContactList';
 import contactsOperations from '../../redux/contacts/contactsOperations'
 import ContactFilter from './contactFilter/ContactFilter';
+import contactsSelectors from '../../redux/contacts/contactsSelectors';
 import { CSSTransition } from "react-transition-group";
 import s from './PhoneBook.module.css';
 // import Notification from './notification/Notification';
@@ -42,7 +43,7 @@ class PhoneBook extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        contacts: state.contacts.contactList,
+        contacts: contactsSelectors.getContacts(state),
     }
 }
 

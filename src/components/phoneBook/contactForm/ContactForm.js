@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import contactsActions from "../../../redux/contacts/contactsActions";
+// import contactsActions from "../../../redux/contacts/contactsActions";
 import contactsOperations from "../../../redux/contacts/contactsOperations";
 import Notification from '../notification/Notification';
 import Empty from '../empty/Empty';
+import contactsSelectors from '../../../redux/contacts/contactsSelectors';
 import { CSSTransition } from "react-transition-group";
 import s from './ContactForm.module.css';
 
@@ -87,15 +88,15 @@ class ContactForm extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        contacts: contactsSelectors.getContacts(state),
+    }
+}
+
 const mapDispatchToProps = {
     addContact: contactsOperations.addContact,
     // addToLocalStorage: contactsActions.addToLocalStorage,
-}
-
-const mapStateToProps = (state) => {
-    return {
-        contacts: state.contacts.contactList,
-    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
